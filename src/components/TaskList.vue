@@ -2,9 +2,12 @@
   <div>
     <ul class="task-list">
       <li v-for="(task, index) in tasks" :key="task.id">
+        
         {{ task.text }}
         <button @click="deleteTask(task.id)">Delete</button>
         <button @click="editTask(index)">Edit</button>
+        <button @click="changeStatus(task, 'In Progress')">Start</button>
+        <button @click="changeStatus(task, 'Done')">Finish</button>
       </li>
     </ul>
   </div>
@@ -22,6 +25,10 @@ export default {
     },
     editTask(index) {
       this.$emit("edit-task", index);
+    },
+    changeStatus(task, newStatus) {
+      task.status = newStatus;
+      this.$emit("change-status", task);
     },
   },
 };
@@ -61,5 +68,4 @@ export default {
 .task-list button:hover {
   background-color: #c0392b;
 }
-
 </style>

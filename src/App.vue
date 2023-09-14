@@ -3,7 +3,7 @@
     <AppHeaderBar />
     <div class="container">
       <TaskInput @add-task="addTask" />
-      <TaskList :tasks="tasks" @delete-task="deleteTask" @edit-task="editTask" />
+      <TaskList :tasks="tasks" @delete-task="deleteTask" @edit-task="editTask" @change-status="changeStatus" />
 
       <!-- Edit Task Modal -->
       <EditTaskModal
@@ -60,6 +60,10 @@ export default {
       this.tasks[this.editTaskIndex].text = editedTask;
       this.showEditModal = false;
       this.editTaskIndex = -1;
+    },
+    changeStatus(task, newStatus) {
+      // Update the task status
+      task.status = newStatus;
     },
   },
 };
